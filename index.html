@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sazzad ICT - HSC 2025 ICT Revision</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Audiowide&family=Permanent+Marker&family=Tiro+Bangla:ital@0;1&display=swap');
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+    
+    body {
+      font-family: 'Anek Bangla', 'Tiro Bangla', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f8ff;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #0066cc, #004a99);
+      color: white;
+      text-align: center;
+      padding: 2.5rem 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.8rem;
+      opacity: 0.9;
+    }
+    section {
+      padding: 2rem 1.2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .instructor-profile {
+      margin-bottom: 3rem;
+    }
+    .profile-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,102,204,0.15);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 800px;
+      margin: 0 auto;
+      border-top: 5px solid #0066cc;
+      /* Removed hover transition */
+    }
+    .profile-image {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .profile-image:after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: #0066cc;
+      border-radius: 3px;
+    }
+    .profile-image img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #0066cc;
+      box-shadow: 0 4px 15px rgba(0,102,204,0.2);
+      /* Removed hover transition */
+    }
+    .profile-details {
+      text-align: center;
+    }
+    .instructor-name {
+      color: #004a99;
+      font-size: 1.8rem;
+      margin: 0.5rem 0;
+      font-weight: 700;
+    }
+    .credentials {
+      margin-top: 1rem;
+    }
+    .credentials p {
+      margin: 0.7rem 0;
+      font-size: 1.1rem;
+      color: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .credentials i {
+      color: #0066cc;
+      font-size: 1.2rem;
+    }
+    h2 {
+      color: #004a99;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      border-left: 5px solid #004a99;
+      padding-left: 12px;
+      font-weight: 600;
+    }
+    .batches {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 600px) {
+      .batches {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+      }
+      .batch-card {
+        padding: 1.2rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+      }
+    }
+    .batch-card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      /* Removed hover transition */
+    }
+    .batch-card h3 {
+      margin-top: 0;
+      margin-bottom: 0.7rem;
+      color: #0066cc;
+      font-size: 1.3rem;
+      border-bottom: 2px solid #e6f0ff;
+      padding-bottom: 0.6rem;
+      font-weight: 600;
+    }
+    .batch-card p {
+      margin: 0.7rem 0;
+      line-height: 1.6;
+    }
+    .batch-days {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .batch-time {
+      display: inline-block;
+      background: #e6f0ff;
+      color: #0066cc;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+    }
+    .seats-remaining {
+      display: flex;
+      align-items: center;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed #e0e0e0;
+    }
+    .seats-count {
+      font-weight: 600;
+      color: #0066cc;
+      margin-left: 0.5rem;
+    }
+    .seats-progress {
+      flex: 1;
+      height: 8px;
+      background: #e6e6e6;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-right: 0.8rem;
+    }
+    .seats-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #0066cc, #4d94ff);
+      border-radius: 4px;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+    .contact-buttons {
+      text-align: center;
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .contact-buttons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0.5rem;
+      padding: 0.9rem 1.5rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      min-width: 200px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .contact-buttons a:active {
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .contact-buttons a i {
+      margin-right: 0.7rem;
+      font-size: 1.3rem;
+    }
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .contact-buttons .call-btn {
+      background: linear-gradient(45deg, #0066cc, #4d94ff, #0066cc);
+      background-size: 200% 200%;
+      animation: gradientAnimation 3s ease infinite;
+    }
+    
+    .contact-buttons .whatsapp-btn {
+      background: linear-gradient(45deg, #25D366, #4FCE5D, #25D366);
+      background-size: 200% 200%;
+      animation: gradientAnimation 3s ease infinite;
+    }
+    .map-container {
+      margin-top: 2.5rem;
+      text-align: center;
+    }
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: 0;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    footer {
+      background: #003366;
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.95rem;
+      margin-top: 3rem;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      header p {
+        font-size: 1.1rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+        margin-top: 2rem;
+      }
+      .profile-card {
+        padding: 1.5rem;
+        flex-direction: column;
+      }
+      .profile-image img {
+        width: 140px;
+        height: 140px;
+      }
+      .instructor-name {
+        font-size: 1.5rem;
+      }
+      .credentials p {
+        font-size: 1rem;
+      }
+      .batch-card {
+        padding: 1.3rem;
+        margin-bottom: 0.8rem;
+      }
+      .contact-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      .contact-buttons a {
+        width: 100%;
+        max-width: 300px;
+        margin: 0.4rem;
+      }
+      section {
+        padding: 1.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section>
+  <div class="instructor-profile">
+    <div class="profile-card">
+      <div class="profile-image">
+        <img src="https://github.com/expgg/sv/blob/main/pfp.jpg?raw=true" alt="Instructor Photo">
+      </div>
+      <div class="profile-details">
+        <h3 class="instructor-name">Md Sazzad Hossain</h3>
+        <div class="credentials">
+          <p><i class="fas fa-graduation-cap"></i> BSc in CSE, City University, Dhaka</p>
+          <p><i class="fas fa-chalkboard-teacher"></i> ICT Instructor</p>
+          <p><i class="fas fa-award"></i> HSC ICT Specialist</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>কোর্সের তথ্য</h2>
+  <p>HSC 2025 ICT Revision ব্যাচে ভর্তি চলছে। সঠিক প্রস্তুতির জন্য আজই ভর্তি হোন!</p>
+  <p><strong>ক্লাস শুরু:</strong> ১০ নভেম্বর, ২০২৪</p>
+
+  <h2>ব্যাচসমূহ</h2>
+  <div class="batches">
+    <div class="batch-card">
+      <h3>ব্যাচ ১</h3>
+      <p><span class="batch-days">শনিবার, সোমবার, বুধবার</span><br>
+      <span class="batch-time">সকাল ৮ টা</span></p>
+      <div class="seats-remaining">
+        <div class="seats-progress">
+          <div class="seats-progress-bar" style="width: 25%;"></div>
+        </div>
+        <div class="seats-count">৫ সিট বাকি</div>
+      </div>
+    </div>
+    <div class="batch-card">
+      <h3>ব্যাচ ২</h3>
+      <p><span class="batch-days">রবিবার, মঙ্গলবার, বৃহস্পতিবার</span><br>
+      <span class="batch-time">সকাল ৮ টা</span></p>
+      <div class="seats-remaining">
+        <div class="seats-progress">
+          <div class="seats-progress-bar" style="width: 40%;"></div>
+        </div>
+        <div class="seats-count">৮ সিট বাকি</div>
+      </div>
+    </div>
+    <div class="batch-card">
+      <h3>ব্যাচ ৩</h3>
+      <p><span class="batch-days">শনিবার, সোমবার, বুধবার</span><br>
+      <span class="batch-time">বিকাল ৫ টা</span></p>
+      <div class="seats-remaining">
+        <div class="seats-progress">
+          <div class="seats-progress-bar" style="width: 65%;"></div>
+        </div>
+        <div class="seats-count">১২ সিট বাকি</div>
+      </div>
+    </div>
+    <div class="batch-card">
+      <h3>ব্যাচ ৪</h3>
+      <p><span class="batch-days">রবিবার, মঙ্গলবার, বৃহস্পতিবার</span><br>
+      <span class="batch-time">বিকাল ৫ টা</span></p>
+      <div class="seats-remaining">
+        <div class="seats-progress">
+          <div class="seats-progress-bar" style="width: 15%;"></div>
+        </div>
+        <div class="seats-count">৩ সিট বাকি</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>যোগাযোগ করুন</h2>
+  <div class="contact-buttons">
+    <a href="tel:+8801725920977" class="call-btn"><i class="fas fa-phone"></i> কল করুন: 01725920977</a>
+    <a href="tel:+8801718615601" class="call-btn"><i class="fas fa-phone"></i> কল করুন: 01718615601</a>
+    <a href="https://wa.me/8801725920977" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ: 01725920977</a>
+    <a href="https://wa.me/8801718615601" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ: 01718615601</a>
+  </div>
+
+  <h2>লোকেশন</h2>
+  <div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d225.81898075869944!2d89.02680518250857!3d25.098351045245998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fc9342c8dcca4f%3A0x20512a20a8ebb190!2z4Kao4Ka_4KaJIOCmleCmqOCmq-Cmv-CmoeCnh-CmqOCnjeCmuCDgppXgp4vgpprgpr_gpoIg4Ka44KeH4Kao4KeN4Kaf4Ka-4KawIE5ldyBDb25maWRlbmNlIENvYWNoaW5nIENlbnRlcg!5e0!3m2!1sen!2sbd!4v1745783671341!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+
+</section>
+
+<footer>
+  যুক্তি ও বাস্তবভিত্তিক পদ্ধতি | © ২০২৫ Sazzad ICT
+</footer>
+
+</body>
+</html>
